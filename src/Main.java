@@ -65,6 +65,10 @@ public class Main {
                     String produto = scanner.nextLine();
                     System.out.print("Digite a quantidade inicial: ");
                     int quantidade = scanner.nextInt();
+                    if (quantidade < 0) {
+                        System.out.println("A quantidade inicial não pode ser negativa.");
+                        break;
+                    }
                     produtos.add(produto);
                     quantidades.add(quantidade);
                     System.out.println("Produto adicionado com sucesso!");
@@ -80,6 +84,14 @@ public class Main {
                     if (indiceEntrada >= 0 && indiceEntrada < produtos.size()) {
                         System.out.print("Digite a quantidade a ser adicionada: ");
                         int entrada = scanner.nextInt();
+                        if (entrada <= 0) {
+                            System.out.println("A quantidade de entrada deve ser positiva.");
+                            break;
+                        }
+                        if (entrada > Integer.MAX_VALUE - quantidades.get(indiceEntrada)) {
+                            System.out.println("A entrada excede o limite de estoque.");
+                            break;
+                        }
                         quantidades.set(indiceEntrada, quantidades.get(indiceEntrada) + entrada);
                         System.out.println("Entrada registrada com sucesso!");
                     } else {
@@ -99,6 +111,10 @@ public class Main {
                     if (indiceSaida >= 0 && indiceSaida < produtos.size()) {
                         System.out.print("Digite a quantidade a ser retirada: ");
                         int saida = scanner.nextInt();
+                        if (saida <= 0) {
+                            System.out.println("A quantidade de saída deve ser positiva.");
+                            break;
+                        }
                         if (quantidades.get(indiceSaida) >= saida) {
                             quantidades.set(indiceSaida, quantidades.get(indiceSaida) - saida);
                             System.out.println("Saída registrada com sucesso!");
